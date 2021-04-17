@@ -17,9 +17,12 @@ RUN echo "mysql-apt-config mysql-apt-config/enable-repo select mysql-5.7" | debc
     && dpkg -i mysql-apt-config_0.8.16-1_all.deb \
     && apt-get update \
     && apt-get install -y mysql-server \
-    && echo "user=mysql" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+    && echo "user=mysql" >> /etc/mysql/mysql.conf.d/mysqld.cnf \
+    && mkdir /init.db
 
 COPY docker-entrypoint.sh /
+
+EXPOSE 3306
 
 ENTRYPOINT ["/bin/bash"] 
 
